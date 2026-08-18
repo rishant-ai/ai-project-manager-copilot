@@ -33,7 +33,7 @@ def test_build_project_context():
     assert "Requirements may change" in context
     assert "Complete prototype" in context
     assert "Blockers:" in context
-    def test_extract_meeting_actions():
+ def test_extract_meeting_actions():
     notes = """
     Rishant will complete the prototype by Friday.
     The team decided to use the current project structure.
