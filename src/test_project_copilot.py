@@ -1,6 +1,7 @@
 from src.project_copilot import ProjectUpdate, analyze_project_update
 from src.ai_workflow import build_project_context, extract_meeting_actions
 
+
 def test_analyze_project_update():
     project = ProjectUpdate(
         project_name="AI Project Manager Copilot",
@@ -17,6 +18,8 @@ def test_analyze_project_update():
     assert "Requirements may change" in result["risks"]
     assert "Complete prototype" in result["actions"]
     assert result["blockers"] == []
+
+
 def test_build_project_context():
     project = ProjectUpdate(
         project_name="AI Project Manager Copilot",
@@ -33,7 +36,9 @@ def test_build_project_context():
     assert "Requirements may change" in context
     assert "Complete prototype" in context
     assert "Blockers:" in context
- def test_extract_meeting_actions():
+
+
+def test_extract_meeting_actions():
     notes = """
     Rishant will complete the prototype by Friday.
     The team decided to use the current project structure.
