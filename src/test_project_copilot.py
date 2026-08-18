@@ -1,5 +1,5 @@
-from project_copilot import ProjectUpdate, analyze_project_update
-from ai_workflow import build_project_context
+from src.project_copilot import ProjectUpdate, analyze_project_update
+from src.ai_workflow import build_project_context
 
 def test_analyze_project_update():
     project = ProjectUpdate(
