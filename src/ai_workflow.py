@@ -28,3 +28,14 @@ Actions:
 Blockers:
 {blockers}
 """.strip()
+
+def extract_meeting_actions(notes: str) -> dict:
+    """Extract actionable information from meeting notes."""
+
+    return {
+        "action_items": [],
+        "owners": [],
+        "deadlines": [],
+        "decisions": [],
+        "follow_up_requirements": [],
+    }
