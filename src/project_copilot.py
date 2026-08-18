@@ -17,7 +17,11 @@ class ProjectUpdate:
     risks: list[str] = field(default_factory=list)
     actions: list[str] = field(default_factory=list)
     blockers: list[str] = field(default_factory=list)
-
+@dataclass
+class Requirement:
+    requirement_id: str
+    description: str
+    priority: str = "Medium"
 
 def analyze_project_update(update: ProjectUpdate) -> dict:
     """
@@ -31,7 +35,20 @@ def analyze_project_update(update: ProjectUpdate) -> dict:
         "actions": update.actions,
         "blockers": update.blockers,
     }
+def analyze_requirements(requirements: list[str]) -> list[Requirement]:
+    """Structure raw project requirements."""
 
+    structured_requirements = []
+
+    for index, requirement in enumerate(requirements, start=1):
+        structured_requirements.append(
+            Requirement(
+                requirement_id=f"FR-{index:02d}",
+                description=requirement.strip(),
+            )
+        )
+
+    return structured_requirements
 
 if __name__ == "__main__":
     project = ProjectUpdate(
