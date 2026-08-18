@@ -1,43 +1,40 @@
 """
 AI Project Manager Copilot
 
-A lightweight prototype for turning project-management inputs
-into structured outputs.
+Prototype for turning project-management information
+into structured project updates.
 """
 
+from dataclasses import dataclass, field
 
-def analyze_project_update(
-    project_name,
-    status,
-    risks=None,
-    actions=None,
-    blockers=None,
-):
+
+@dataclass
+class ProjectUpdate:
+    """Structured project information."""
+
+    project_name: str
+    status: str
+    risks: list[str] = field(default_factory=list)
+    actions: list[str] = field(default_factory=list)
+    blockers: list[str] = field(default_factory=list)
+
+
+def analyze_project_update(update: ProjectUpdate) -> dict:
     """
-    Create a structured project update.
-
-    Parameters:
-        project_name: Name of the project.
-        status: Current project status.
-        risks: Current project risks.
-        actions: Open action items.
-        blockers: Current blockers.
-
-    Returns:
-        A structured dictionary containing the project update.
+    Convert a ProjectUpdate into a structured dictionary.
     """
 
     return {
-        "project_name": project_name,
-        "status": status,
-        "risks": risks or [],
-        "actions": actions or [],
-        "blockers": blockers or [],
+        "project_name": update.project_name,
+        "status": update.status,
+        "risks": update.risks,
+        "actions": update.actions,
+        "blockers": update.blockers,
     }
 
 
 if __name__ == "__main__":
-    update = analyze_project_update(
+    project = ProjectUpdate(
         project_name="AI Project Manager Copilot",
         status="Building",
         risks=["Requirements may change"],
@@ -45,6 +42,8 @@ if __name__ == "__main__":
         blockers=[],
     )
 
+    result = analyze_project_update(project)
+
     print("AI Project Manager Copilot")
     print("==========================")
-    print(update)
+    print(result)
