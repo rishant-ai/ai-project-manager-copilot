@@ -1,5 +1,5 @@
 from src.project_copilot import ProjectUpdate, analyze_project_update
-from src.ai_workflow import build_project_context
+from src.ai_workflow import build_project_context, extract_meeting_actions
 
 def test_analyze_project_update():
     project = ProjectUpdate(
@@ -33,3 +33,17 @@ def test_build_project_context():
     assert "Requirements may change" in context
     assert "Complete prototype" in context
     assert "Blockers:" in context
+    def test_extract_meeting_actions():
+    notes = """
+    Rishant will complete the prototype by Friday.
+    The team decided to use the current project structure.
+    We will review progress next Monday.
+    """
+
+    result = extract_meeting_actions(notes)
+
+    assert "action_items" in result
+    assert "owners" in result
+    assert "deadlines" in result
+    assert "decisions" in result
+    assert "follow_up_requirements" in result
