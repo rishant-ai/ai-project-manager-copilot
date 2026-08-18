@@ -49,7 +49,21 @@ def analyze_requirements(requirements: list[str]) -> list[Requirement]:
         )
 
     return structured_requirements
+def identify_risks(project: ProjectUpdate) -> list[str]:
+    """Identify potential project risks."""
 
+    risks = list(project.risks)
+
+    if project.status.lower() in {"blocked", "delayed", "at risk"}:
+        risks.append(f"Project status is {project.status}")
+
+    if project.blockers:
+        risks.extend(
+            f"Blocker: {blocker}"
+            for blocker in project.blockers
+        )
+
+    return risks
 if __name__ == "__main__":
     project = ProjectUpdate(
         project_name="AI Project Manager Copilot",
